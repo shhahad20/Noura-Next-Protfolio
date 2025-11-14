@@ -1,0 +1,48 @@
+.project-details {
+  padding: 80px 20px;
+  max-width: 900px;
+  margin: 0 auto;
+  color: #fff;
+  text-align: center;
+
+  &__header {
+    margin-bottom: 30px;
+  }
+
+  &__back {
+    display: inline-block;
+    margin-bottom: 15px;
+    color: #ccc;
+    text-decoration: none;
+
+    &:hover {
+      color: #fff;
+    }
+  }
+
+  &__image img {
+    width: 100%;
+    border-radius: 10px;
+    margin: 20px 0;
+  }
+
+  &__meta {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 10px;
+  }
+
+  &__tech {
+    margin-top: 20px;
+
+    &-tag {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 5px;
+      padding: 6px 12px;
+      margin: 5px;
+      font-size: 14px;
+    }
+  }
+}

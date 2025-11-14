@@ -1,0 +1,187 @@
+@import "mixins";
+
+// body[dir="rtl"] {
+//   .about {
+//     .about-container {
+//       .about-paragraph {
+//         text-align: justify;
+//       }
+//     }
+//   }
+// }
+.about {
+  //   height: 100vh;
+  margin-top: 5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .about__title {
+    @include header-style(3rem);
+    line-height: normal;
+  }
+  .about-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    // align-items: center;
+    width: 1200px;
+    gap: 1rem;
+    margin-top: 3rem;
+    flex-wrap: wrap; // allow wrapping for smaller screens
+    color: #fff8f0;
+    // .experience-keywords {
+    //   width: 600px;
+    //   display: flex;
+    //   justify-content: center;
+    //   flex-direction: column;
+    //   align-items: flex-start;
+    //   padding: 1rem;
+    //   //   padding-left: 3rem;
+    //   border: 1px solid rgba(255, 230, 190, 0.15);
+    //   border-radius: 1.5rem;
+
+    //   .experience-headers {
+    //     padding: 0 1rem;
+
+    //     h1 {
+    //       font-size: 1.2rem;
+    //       font-weight: 600;
+    //       margin: 0;
+    //       padding: 0;
+    //     }
+    //     p {
+    //       margin: 0;
+    //       padding: 0;
+    //       color: #e2c9b9;
+    //     }
+    //   }
+
+    //   .experience-list {
+    //     // border: 1px solid red;
+    //     width: 95%;
+    //     // background-color: #e2c9b9;
+    //     list-style: disc;
+    //     .experience-item {
+    //       //   border: 1px solid white;
+    //       gap: 0;
+    //       margin: 0;
+    //       margin-bottom: 1rem;
+    //       padding: 0 1rem;
+
+    //       .experience-item__header {
+    //         // gap: 2rem;
+    //         display: flex;
+    //         justify-content: space-between;
+    //         margin: 0;
+    //         padding: 0;
+    //         // border: 1px solid blue;
+
+    //         h3,
+    //         span {
+    //           margin: 0;
+    //           padding: 0;
+    //         }
+
+    //         .experience-period {
+    //           color: #e2c9b9;
+    //           font-size: 0.9rem;
+    //         }
+    //       }
+    //       .experience-position {
+    //         margin-top: 0.25rem;
+    //         font-style: italic;
+    //         color: #f6e9e0;
+    //       }
+    //     }
+    //   }
+    // }
+
+    .about-paragraph {
+      width: 800px;
+      padding: 1.5rem;
+      text-align: center;
+      //   padding-left: 3rem;
+      // border: 1px solid rgba(255, 230, 190, 0.15);
+      border-radius: 1.5rem;
+
+      h1,
+      p {
+        font-size: 1.2rem;
+        font-weight: 400;
+      }
+    }
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  // .about {
+  //   .about-container {
+  //     // width: 95%;
+  //     gap: 1rem;
+  //     .experience-keywords,
+  //     .about-paragraph {
+  //       // width: 48%;
+  //     }
+  //   }
+  // }
+}
+
+/* For large screens: lay out experience items as cards in a row/grid */
+@media (min-width: 1024px) {
+  // .about {
+  //   .experience-list {
+  //     list-style: none; /* hide default bullets for card layout */
+  //     display: grid;
+  //     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  //     gap: 1rem;
+  //     width: 100%;
+
+  //     .experience-item {
+  //       list-style: none;
+  //       background: transparent; /* keep background consistent with design */
+  //       margin: 0;
+  //       padding: 1rem;
+  //       border-radius: 0.75rem;
+  //       // optionally add subtle backdrop/filter here if needed
+  //     }
+  //   }
+  // }
+}
+
+@media (max-width: 768px) {
+  .about {
+    .about-container {
+      width: 85%;
+      // gap: 1rem;
+      .about-paragraph {
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .about {
+    .about__title {
+      @include header-style(2.5rem);
+      line-height: normal;
+      margin-bottom: 0;
+      padding-bottom: 0;
+    }
+
+    margin-top: 2.5rem;
+    .about-container {
+      padding: 0 0.5rem;
+
+      .about-paragraph {
+        padding: 0rem;
+        p {
+          font-size: 1.2rem;
+          // text-align: justify;
+        }
+      }
+    }
+  }
+}

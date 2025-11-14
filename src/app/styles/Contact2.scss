@@ -1,0 +1,142 @@
+@import "mixins";
+
+.contact2-simple-header-col {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  width: 40%;
+  gap: 1rem;
+}
+.contact2-simple-header-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  justify-content: center;
+}
+.contact2-simple-socials-col {
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
+  width: 50%;
+}
+.contact2-simple-outer {
+  width: 100%;
+  min-height: 30vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 0 48px 0;
+  background: none;
+}
+.contact2-simple-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  justify-content: center;
+}
+
+.contact2-simple-title {
+  @include header-style(3rem);
+}
+
+.contact2-copy-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(15, 15, 15, 0.8);
+  color: #a0a0a0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  font-size: 0.95rem;
+  // font-weight: 600;
+  padding: 10px 30px;
+  cursor: pointer;
+  transition: background 0.18s, color 0.18s;
+}
+.contact2-copy-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+.contact2-copy-btn svg {
+  display: block;
+}
+
+.contact2-simple-socials {
+  display: flex;
+  gap: 22px;
+  justify-content: center;
+  flex-direction: row;
+  align-items: center;
+}
+.contact2-social svg {
+  display: block;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(255, 255, 255, 0.1);
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.contact2-social:hover svg {
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.1);
+  transform: scale(1.12) rotate(-4deg);
+}
+
+@media (max-width: 1024px) {
+  .contact2-simple-header-col {
+    width: 100%;
+    justify-content: center;
+    gap: 3rem;
+  }
+  .contact2-simple-header-row {
+    width: 100%;
+    gap: 0;
+    justify-content: right;
+  }
+  .contact2-simple-socials-col {
+    width: 100%;
+    margin-top: 8px;
+    justify-content: left;
+  }
+}
+@media (max-width: 768px) {
+  .contact2-simple-header-col {
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0;
+  }
+  .contact2-simple-header-row {
+    width: 100%;
+    justify-content: center;
+  }
+  .contact2-simple-socials-col {
+    width: 100%;
+    margin-top: 8px;
+    justify-content: center;
+  }
+  .contact2-simple-outer{
+min-height: 100%;
+  }
+}
+@media (max-width: 480px) {
+  .contact2-simple-outer {
+    padding: 36px 0 36px 0;
+  }
+  .contact2-simple-header-col {
+    width: 100%;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .contact2-simple-socials-col {
+    width: 90%;
+    margin-top: 6px;
+  }
+  .contact2-simple-title {
+    @include header-style(2.4rem);
+  }
+  .contact2-copy-btn {
+    font-size: 0.9rem;
+    padding: 8px 24px;
+  }
+}

@@ -1,0 +1,320 @@
+@import "mixins";
+body[dir="rtl"] {
+  .contact-section {
+    .contact__frame {
+      .contact__content {
+        .contact__cta {
+          font-family: "Noto Kufi Arabic", sans-serif;
+          font-size: 0.876rem;
+          padding: 0.5rem 3rem;
+        }
+      }
+    }
+  }
+}
+
+.contact-section {
+  position: relative;
+  height: 60vh;
+  min-height: 60vh;
+  margin: 0;
+  padding: 0;
+  --x: calc(var(--posX, 0) * 1px);
+  --y: calc(var(--posY, 0) * 1px);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  /* allow the blurred pseudo-element to bleed outside the section
+    so the edges appear to glow / 'blind' into the page background */
+  // overflow-x: hidden;
+  overflow: hidden;
+  /* tuning variables: how far the blur spreads beyond edges, and blur amount */
+  --contact-spread: 1rem;
+  --contact-blur: 8px;
+  color: white;
+
+  /* Move the visual background into a blurred pseudo-element so the
+     content can sit above it sharp and readable. The original
+     background-image is duplicated here on ::before and blurred. */
+  &::before {
+    content: "";
+    position: absolute;
+    /* extend beyond the section bounds so the blur is visible at edges */
+    /* Extend vertically but not horizontally */
+    // top: 0; /* start exactly at top of the section */
+    left: 0;
+    right: 0;
+    height: 90%; /* only a thin blurred band at top */
+    z-index: 0;
+
+    /* replicate the background styles from the parent */
+    background-image:
+      /* warm angled wash (top-most) */ linear-gradient(
+        115deg,
+        rgba(249, 212, 146, 0.6),
+        rgba(54, 22, 20, 0.8)
+      ),
+      /* top-centered warm reflection (moves with --x/--y) */
+        radial-gradient(
+          90% 100% at calc(50% + var(--x)) calc(0% + var(--y)),
+          rgba(255, 230, 190, 0.5),
+          rgba(48, 20, 20, 0.75)
+        ),
+      /* orange → burnt transition near top-right */
+        radial-gradient(
+          100% 100% at calc(80% - var(--x)) calc(0% - var(--y)),
+          rgba(225, 140, 95, 0.72),
+          rgba(40, 18, 18, 0.92)
+        ),
+      /* wide purple depth wash coming from the right */
+        radial-gradient(
+          150% 210% at calc(100% + var(--x)) calc(0% + var(--y)),
+          rgba(58, 29, 67, 0.56),
+          /* deep plum */ rgba(28, 12, 40, 0.72) /* near-black purple */
+        ),
+      /* golden highlight on the right side */
+        radial-gradient(
+          100% 100% at calc(100% - var(--x)) calc(30% - var(--y)),
+          rgba(255, 200, 70, 0.45),
+          rgba(80, 26, 90, 0.46) /* muted purple (keeps warm→purple blend) */
+        ),
+      /* dark violet base (bottom-most) */
+        linear-gradient(60deg, rgba(60, 20, 30, 0.7), rgba(35, 20, 60, 0.75));
+
+    background-blend-mode: overlay, overlay, difference, difference, difference,
+      normal;
+    background-size: cover;
+    background-repeat: no-repeat;
+    /* blur, scale slightly, and increase opacity for a stronger 'glow' */
+    filter: blur(var(--contact-blur));
+    // transform: scale(1.04);
+    opacity: 0.98;
+    pointer-events: none; /* allow clicks through to content */
+  }
+  /* Responsiveness: adjust the blur height for smaller screens */
+  @media (max-width: 1024px) {
+    --contact-blur: 8px;
+    // &::before {
+    //   height: 100px;
+    // }
+  }
+
+  @media (max-width: 768px) {
+    --contact-blur: 7px;
+    // &::before {
+    //   height: 80px;
+    // }
+  }
+
+  @media (max-width: 480px) {
+    --contact-blur: 6px;
+    // &::before {
+    //   height: 60px;
+    // }
+  }
+}
+.contact__frame {
+  width: 100%;
+  position: relative;
+  z-index: 100;
+  /* layout so footer can sit at the bottom of the frame */
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  .contact__content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    /* allow the content area to grow and push footer to the bottom */
+    flex: 1 1 auto;
+
+    .contact__title {
+      @include header-style(3rem);
+      // Tablet size
+      @media (max-width: 768px) {
+        font-size: 2.5rem;
+        margin-bottom: 16px;
+      }
+
+      // Mobile size
+      @media (max-width: 480px) {
+        font-size: 2.1rem;
+        line-height: normal;
+        margin-bottom: 14px;
+        // letter-spacing: 0.5px;
+        // line-height: 3rem;
+      }
+      // Small mobile
+      @media (max-width: 360px) {
+        font-size: 1.8rem;
+      }
+    }
+    .contact__greeting {
+      width: 40%;
+    }
+  }
+  /* if a footer element is placed inside .contact__frame, push it to the bottom */
+  & > footer {
+    margin-top: auto;
+    z-index: 10; /* keep it above the blurred background */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  /* CTA button style matching the provided design: large pill, light background, dark text */
+  .contact__cta {
+    appearance: none;
+    -webkit-appearance: none;
+    border: none;
+    background: #f3f3f3; /* soft near-white */
+    color: #0b0b0b;
+    padding: 8px 1rem;
+    font-size: clamp(1rem, 2.8vw, 1.6rem);
+    font-weight: 600;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    cursor: pointer;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+    // transition: transform 160ms ease, box-shadow 160ms ease;
+    margin-top: 1.25rem;
+    // min-width: 18rem;
+    font-size: 16px;
+  }
+
+  /* small right icon using a pseudo-element to match the tiny corner glyph in the screenshot */
+  .contact__cta::after {
+    content: "›"; /* using a thin chevron */
+    display: inline-block;
+    // transform: rotate(-12deg);
+    font-size: 18px;
+    line-height: 0;
+    margin-left: 0.2rem;
+    color: #0b0b0b;
+    opacity: 0.9;
+  }
+
+  .contact__socials {
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: center;
+    gap: 1.2rem;
+
+    a {
+      // font-size: 1.5rem;
+      color: var(--text-color, #fff);
+      transition: color 0.3s ease, transform 0.2s ease;
+      svg {
+        width: 1.5rem;
+      }
+      &:hover {
+        color: var(--accent-color, #f9d492);
+        transform: translateY(-3px);
+      }
+    }
+  }
+
+  /* responsive adjustments */
+  @media (max-width: 1028px) {
+    .contact__cta {
+      padding: 0.9rem 3rem;
+      min-width: 14rem;
+    }
+    .contact__content {
+      .contact__greeting {
+        width: 60%;
+        font-size: 1rem;
+        padding: 0 1.2rem;
+      }
+    }
+  }
+  @media (max-width: 768px) {
+    .contact__cta {
+      padding: 0.9rem 3rem;
+      min-width: 14rem;
+    }
+    .contact__content {
+      .contact__greeting {
+        width: 80%;
+      }
+    }
+  }
+  @media (max-width: 480px) {
+    .contact__cta {
+      padding: 0.75rem 2rem;
+      font-size: 1rem;
+      min-width: 12rem;
+    }
+    // .contact__greeting {
+    //   width: 100%;
+    //   margin: 0 auto;
+    //   margin-top: 0.5rem;
+    // }
+  }
+  .contact__title {
+    width: 90%;
+  }
+  .contact__content {
+    .contact__greeting {
+      font-weight: 400;
+      font-size: 1rem;
+      width: 100%;
+    }
+  }
+}
+
+footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding: 1rem 0;
+
+  h3,
+  p {
+    color: #333;
+    color: #f3f3f3;
+    font-weight: 400;
+    font-size: 14px;
+    margin: 0;
+    text-align: center;
+  }
+
+  // Tablet adjustments
+  @media (max-width: 768px) {
+    padding: 0.8rem 0;
+
+    h3,
+    p {
+      font-size: 13px;
+    }
+  }
+
+  // Mobile adjustments
+  @media (max-width: 480px) {
+    padding: 0.6rem 0;
+
+    h3,
+    p {
+      font-size: 12px;
+    }
+  }
+
+  // Small mobile
+  @media (max-width: 360px) {
+    h3,
+    p {
+      font-size: 11px;
+    }
+  }
+}

@@ -1,0 +1,97 @@
+{
+      "navbar": {
+    "home": "Home",
+    "about": "About",
+    "projects": "Projects",
+    "contact": "Contact"
+  }
+  ,
+  "hero": {
+    "title": "Hello! I'm Noura Altharwa",
+    "subtitle": "Bridging Business, Education & Technology",
+    "aiHeader": "Quick Access Using AI",
+    "placeholder": "Type your message here...",
+    "selectTopics": "Select Topics",
+    "send": "Send"
+  },
+  "options": {
+    "general": "General",
+    "business": "Business",
+    "education": "Education",
+    "technology": "Technology"
+  },
+  "ai":{
+    "title": "Noura's Ai Assistant",
+    "responseHeader": "AI-Powered Responses",
+    "placeholder": "Type your question here...",
+    "startingMsg": "How can I assist you today?",
+    "loading": "Loading...",
+    "writting": "Typing...",
+    "error": "Something went wrong. Please try again."
+  }
+,
+    "about": {
+    "title": "Where It All Began",
+    "paragraph1": "Holds a Master’s degree in Executive Business Administration with First-Class Honors (Excellent). A part-time faculty member at the Saudi Electronic University. A graduate of the Apple Developer Academy. I have developed five applications in collaboration with my team, and I am currently managing two teams working on two different applications — one specializing in real estate technology and the other in food technology using artificial intelligence, which was selected as an innovative application.",
+    "paragraph2": "I also managed a home-based bakery project that served more than 10 cafés in Hail. I worked as an English language instructor at Elaf Institute for diploma students and authored an English learning book that is still in use at the institution.",
+    "paragraph3": "I represented the Apple Academy at the 2023 LEAP Conference and participated in the 2024 LEAP Conference as one of the exhibitors for the LAN application project in the field of real estate technology.",
+    "subtitle": "What I’ve Been Working On",
+    "subtext": "Professional Experience"
+  },
+  "education": {
+    "title": "Educational Background",
+    "subtitle": "Academic excellence and continuous learning",
+    "master": {
+      "university": "University of Hail",
+      "period": "2022–2024",
+      "degree": "Master’s Degree in Executive Business Administration",
+      "gpa": "GPA: 3.8 / 4"
+    },
+    "diploma": {
+      "university": "University of Hail",
+      "period": "2016–2017",
+      "degree": "Diploma in General Education",
+      "gpa": "GPA: 3.8 / 4"
+    },
+    "bachelor": {
+      "university": "University of Hail",
+      "period": "2011–2015",
+      "degree": "Bachelor’s Degree in English Language",
+      "gpa": "GPA: 3.9 / 4"
+    }
+  },
+  "about2":{
+    "exp1": "Faculty Member",
+    "exp1Desc": "Saudi Electronic University",
+    "exp2": "Business Application Developer",
+    "exp2Desc": "Apple Academy",
+    "exp3": "Co-Founder and Director",
+    "exp3Desc": "LAN & Munchable - Startups",
+    "exp4": "Business owner",
+    "exp4Desc": "Brown - Home Bakery",
+    "exp5": "English Language Instructor",
+    "exp5Desc": "Elaf Institute",
+    "exp6": "Translator",
+    "exp6Desc": "Freelance Translation Services"
+  },
+  "recentProjects": {
+    "title": "Recent Projects",
+    "subtitle": "Crafting digital experiences that make a difference",
+    "viewProject": "View Project"
+  },
+  "core":{
+    "title": "Core Competencies",
+    "core1": "Business Development",
+    "core2": "Team Leadership",
+    "core3": "Mobile Application Development",
+    "core4": "Translation Services",
+    "core5": "Educator",
+    "core6": "Artist"
+  },
+  "contact":{
+    "title": "Want to make a difference? So do I",
+    "subtitle": "Let’s connect to share ideas, discuss partnerships, or collaborate on future projects in tech, education, or business development.",
+    "btnText": "Get in Touch"
+  }
+}
+

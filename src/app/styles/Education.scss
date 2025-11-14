@@ -1,0 +1,186 @@
+@import "mixins";
+
+.education-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem; 
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.education-hero {
+  text-align: center;
+  animation: fadeIn 1s ease-out;
+
+  .hero-title {
+    @include header-style(3rem);
+  }
+
+  .hero-subtitle {
+    font-size: 1rem;
+    color: #e2c9b9;
+    font-weight: 300;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+}
+
+.education-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+}
+
+.education-item {
+  padding: 2rem;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+  // cursor: pointer;
+
+  // &.hovered {
+  //   transform: translateY(-12px) scale(1.02);
+  // }
+}
+
+.item-header {
+  .degree-name {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #fff8f0;
+  }
+
+  .field-badge {
+    border-radius: 50px;
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+}
+
+.institution-block {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  gap: 2rem;
+  flex-wrap: wrap;
+  .institution-title {
+    display: flex;
+    flex-direction: row;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #e2c9b9;
+    svg {
+      width: 16px;
+    }
+  }
+
+  .meta-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    .meta-detail {
+      display: flex;
+      justify-content: flex-start;
+      flex-direction: row;
+      align-items: center;
+      gap: 0.5rem;
+      color: #e2c9b9;
+      font-size: 0.95rem;
+      font-weight: 500;
+
+      svg {
+        color: #e2c9b9;
+        width: 16px;
+      }
+    }
+  }
+
+  .gpa-badge {
+    color: #e2c9b9;
+    font-weight: 600;
+    font-size: 1rem;
+  }
+}
+
+// Animations
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Responsive Design
+@media (max-width: 1024px) {
+//   .education-hero .hero-title {
+//     font-size: 2.5rem;
+//   }
+
+  .education-item {
+    padding: 1.5rem;
+  }
+
+  .institution-block {
+    gap: 1rem;
+    .meta-row {
+      gap: 0.75rem;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .education-hero .hero-title {
+    font-size: 3rem;
+  }
+
+//   .education-hero .hero-subtitle {
+//     // font-size: 0.9rem;
+//   }
+
+  .education-grid {
+    grid-template-columns: 1fr; // one card per row
+  }
+
+  .education-item {
+    padding: 1.25rem;
+  }
+
+//   .institution-block {
+//     // flex-direction: column;
+//     // align-items: flex-start;
+//     // gap: 0.75rem;
+//   }
+}
+
+@media (max-width: 480px) {
+.education-inner{
+    padding: 0 0.5rem;
+    margin-top: 3rem;
+}
+  .education-hero .hero-title {
+    font-size: 2.5rem;
+    line-height: normal;
+  }
+
+  .education-hero .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .education-item {
+    padding: 1rem;
+  }
+
+  .degree-name {
+    font-size: 1rem;
+  }
+
+  .meta-detail {
+    font-size: 0.8rem;
+  }
+}

@@ -1,0 +1,12 @@
+@mixin header-style($fontSize, $lang: "en") {
+  font-weight: 600;
+  color: #fffaf6;
+  text-shadow: 0 0 20px rgba(238, 200, 175, 0.1),
+    0 0 10px rgba(238, 200, 175, 0.2), 0 0 10px rgba(238, 200, 175, 0.2);
+  text-align: center;
+  font-size: $fontSize;
+
+  body[dir="rtl"] & {
+    font-family: "Kufam", sans-serif;
+  }
+}
