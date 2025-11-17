@@ -2,7 +2,9 @@ import Image from "next/image";
 import { projectsData, Project } from "../../data/projectsData";
 import Link from "next/link";
 
-export default function ProjectDetails({ params }: { params: { id: string } }) {
+export default function ProjectDetails(
+  { params }: { params: { id: string } }
+) {
   const project = projectsData.find((p: Project) => p.id === Number(params.id));
 
   if (!project) {

@@ -232,7 +232,7 @@ const RecentProjects = () => {
                       transition={{ duration: 0.2 }}
                     >
                       <Link href={`/projects/${project.id}`}>{t("recentProjects.viewProject")}</Link>
-                    </motion.div>
+                    </motion.div> 
                   </div>
                   <div
                     className={`recent-projects__status recent-projects__status--${getStatusColor(

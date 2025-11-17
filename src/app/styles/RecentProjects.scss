@@ -21,7 +21,7 @@
 // ===============================
 // 🎨 COLOR PALETTE — HERO MATCHED
 // ===============================
-// $bg-dark: #120a0a; 
+// $bg-dark: #120a0a;
 $bg-dark: #0a0a0a;
 // $bg-card: rgba(25, 10, 15, 0.8);
 $bg-card: rgba(15, 15, 15, 0.8);
@@ -537,6 +537,7 @@ $status-live: linear-gradient(
     @include flex-center;
     opacity: 0;
     transition: opacity 0.3s ease;
+    pointer-events: none;
 
     .recent-projects__card:hover & {
       opacity: 1;
@@ -549,6 +550,8 @@ $status-live: linear-gradient(
     padding: 0.75rem 1.5rem;
     border-radius: 2rem;
     font-weight: 600;
+    pointer-events: auto; // button is clickable
+    z-index: 9999;
     @include glass-effect;
   }
 
@@ -609,7 +612,7 @@ $status-live: linear-gradient(
 
   &__year {
     color: $text-muted;
-    
+
     font-size: 0.875rem;
   }
 
@@ -714,7 +717,7 @@ $status-live: linear-gradient(
 @media (max-width: 768px) {
   .recent-projects {
     // padding: 0rem 1rem;
-  margin-top: -30rem;
+    margin-top: -30rem;
 
     &__grid {
       grid-template-columns: 1fr;
