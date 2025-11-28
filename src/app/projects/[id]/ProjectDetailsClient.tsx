@@ -4,18 +4,15 @@ import { Project } from "@/app/data/projectsData";
 import Image from "next/image";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
+import { Bookmark, Calendar, Loader } from "lucide-react";
 
-// interface Project {
-//   title: { en: string; ar: string };
-//   category: { en: string; ar: string };
-//   image: string;
-//   description: { en: string; ar: string };
-//   year: number;
-//   status: { en: string; ar: string };
-//   tech: string[];
-// }
+import "../../styles/projectDetails.scss";
 
-export default function ProjectDetailsClient({ project }: { project: Project }) {
+export default function ProjectDetailsClient({
+  project,
+}: {
+  project: Project;
+}) {
   const { i18n } = useTranslation();
   const lang = i18n.language as "en" | "ar";
 
@@ -36,7 +33,28 @@ export default function ProjectDetailsClient({ project }: { project: Project }) 
         </Link>
 
         <h1 className="project-details__title">{project.title[lang]}</h1>
-        <p className="project-details__category">{project.category[lang]}</p>
+        <p className="project-details__category">
+          {" "}
+          <Bookmark size={14} />
+          {project.category[lang]}
+        </p>
+        <div className="project-details__tech">
+          {project.tech.map((t: string, i: number) => (
+            <span key={i} className="project-details__tech-tag">
+              {t}
+            </span>
+          ))}
+        </div>
+        <div className="project-details__meta">
+          <Calendar />
+          <span>
+            {lang === "ar" ? "السنة" : "Year"}: {project.year}
+          </span>
+          <Loader />
+          <span>
+            {lang === "ar" ? "الحالة" : "Status"}: {project.status[lang]}
+          </span>
+        </div>
       </div>
 
       <div className="project-details__image">
@@ -49,18 +67,9 @@ export default function ProjectDetailsClient({ project }: { project: Project }) 
       </div>
 
       <div className="project-details__info">
-        <p className="project-details__description">{project.description[lang]}</p>
-
-        <div className="project-details__meta">
-          <span>{lang === "ar" ? "السنة" : "Year"}: {project.year}</span>
-          <span>{lang === "ar" ? "الحالة" : "Status"}: {project.status[lang]}</span>
-        </div>
-
-        <div className="project-details__tech">
-          {project.tech.map((t: string, i: number) => (
-            <span key={i} className="project-details__tech-tag">{t}</span>
-          ))}
-        </div>
+        <p className="project-details__description">
+          {project.description[lang]}
+        </p>
       </div>
     </div>
   );
