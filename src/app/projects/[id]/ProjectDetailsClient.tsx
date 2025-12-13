@@ -7,6 +7,8 @@ import { useTranslation } from "react-i18next";
 import { Bookmark, Calendar, Loader } from "lucide-react";
 
 import "../../styles/projectDetails.scss";
+import Navbar from "@/app/components/Navbar";
+import Footer from "@/app/components/Footer";
 
 export default function ProjectDetailsClient({
   project,
@@ -26,6 +28,8 @@ export default function ProjectDetailsClient({
   }
 
   return (
+    <>
+    <Navbar/>
     <div className="project-details">
       <div className="project-details__header">
         <Link href="/" className="project-details__back">
@@ -72,5 +76,7 @@ export default function ProjectDetailsClient({
         </p>
       </div>
     </div>
+    <Footer/>
+    </>
   );
 }

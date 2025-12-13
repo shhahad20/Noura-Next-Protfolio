@@ -1,179 +1,217 @@
-// InfiniteScrollText.scss
-@import "mixins";
+// .infinite-scroll-page {
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   flex-direction: column;
+//   padding: 2rem;
+//   min-height: 50vh;
+//   position: relative;
 
+//   .toggle-language {
+//     position: absolute;
+//     top: 2rem;
+//     right: 2rem;
+//     padding: 0.75rem 1.5rem;
+//     background: rgba(255, 255, 255, 0.2);
+//     border: 2px solid rgba(255, 255, 255, 0.3);
+//     border-radius: 50px;
+//     color: white;
+//     font-weight: 600;
+//     cursor: pointer;
+//     backdrop-filter: blur(10px);
+//     transition: all 0.3s ease;
+
+//     &:hover {
+//       background: rgba(255, 255, 255, 0.3);
+//       transform: scale(1.05);
+//     }
+//   }
+
+//   .core-competencies__title {
+//     font-size: clamp(2rem, 5vw, 3.5rem);
+//     font-weight: 700;
+//     color: white;
+//     margin-bottom: 4rem;
+//     text-align: center;
+//     text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+//   }
+
+//   .scroll-container {
+//     width: 100%;
+//     max-width: 800px;
+//     overflow: hidden;
+//     -webkit-mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+//     mask-image: linear-gradient(to right, transparent 0%, black 10%, black 90%, transparent 100%);
+//   }
+
+//   .scroll-wrapper {
+//     display: flex;
+//     gap: 1rem;
+//     animation: scroll 50s linear infinite;
+//     width: max-content;
+//   }
+
+//   .scroll-item {
+//     font-size: 16px;
+//     font-weight: 400;
+//     color: #e2e8f0;
+//     background-color: #171717;
+//     border-radius: 50px;
+//     border: 1px solid #333;
+//     padding: 5px 20px;
+//     white-space: nowrap;
+//     flex-shrink: 0;
+//     cursor: pointer;
+//     display: inline-flex;
+//     align-items: center;
+//     transition: all 0.3s ease;
+
+//     &:hover {
+//       filter: brightness(1.2);
+//       transform: scale(1.05);
+//     }
+//   }
+
+//   &.infinite-scroll-page--ar {
+//     .scroll-wrapper {
+//       animation-direction: reverse;
+//     }
+//     .scroll-item {
+//       direction: rtl;
+//       text-align: right;
+//       unicode-bidi: bidi-override;
+//     }
+//   }
+// }
+
+// @keyframes scroll {
+//   0% { transform: translateX(0); }
+//   100% { transform: translateX(calc(var(--scroll-width) * -1)); }
+// }
+
+// --------------------------------------------------------------
+
+/* keep your design colors, pill look, hover, shadows */
 .infinite-scroll-page {
-  //   min-height: 100vh;
-  //   background-color: #0f172a;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
-  padding: 1rem;
-  min-height: 50vh;
+  padding: 2rem;
+  min-height: 40vh;
+  position: relative;
+  color: #e2e8f0;
+
   .core-competencies__title {
-    @include header-style(3rem);
+    font-size: clamp(2rem, 5vw, 3.2rem);
+    font-weight: 700;
+    margin-bottom: 2.5rem;
+    color: #fff;
+    text-align: center;
+    text-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
   }
 }
 
-.scroll-container {
-  position: relative;
+/* viewport clipping with gradient masks */
+.scroll-viewport {
+  width: 100%;
+  max-width: 900px;
   overflow: hidden;
-  // width: 25vw;
-  // min-width: 220px;
-  // max-width: 350px;
-  min-width: 220px;
-  max-width: 800px;
-  -webkit-mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    black 10%,
-    black 90%,
-    transparent 100%
-  );
-  mask-image: linear-gradient(
-    to right,
-    transparent 0%,
-    black 10%,
-    black 90%,
-    transparent 100%
-  );
-  -webkit-mask-size: 100% 100%;
-  mask-size: 100% 100%;
-  -webkit-mask-repeat: no-repeat;
-  mask-repeat: no-repeat;
-
-  // &::before,
-  // &::after {
-  //   content: "";
-  //   position: absolute;
-  //   top: 0;
-  //   width: 10%;
-  //   height: 100%;
-  //   z-index: 2;
-  //   pointer-events: none;
-
-  // }
-
-  // &::before {
-  //   left: 0;
-  //   // background-color: #111;
-  //   background: linear-gradient(to right, #0d0d0d, transparent);
-  // }
-
-  // &::after {
-  //   right: 0;
-  //   // background-color: #111;
-  //   background: linear-gradient(to left, #0d0d0d, transparent);
-  // }
+  position: relative;
+  padding: 1.25rem 0;
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
 }
 
-@keyframes scroll {
+/* track that moves horizontally (we duplicate blocks inside) */
+.scroll-track {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: max-content;
+  /* animation is set inline (duration & direction) from React when ready */
+}
+
+/* a block is one full sequence of items (we repeat blocks then duplicate them) */
+.scroll-block {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+/* pill items */
+.scroll-item {
+  background: rgba(23, 23, 23, 0.92);
+  border: 1px solid #333;
+  color: #e2e8f0;
+  padding: 0.6rem 1.25rem;
+  border-radius: 999px;
+  font-weight: 600;
+  font-size: clamp(0.95rem, 2.2vw, 1.25rem);
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: transform 200ms ease, background 200ms ease, box-shadow 200ms ease;
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.08);
+  backdrop-filter: blur(6px);
+}
+
+/* Arabic styling inside pills */
+.scroll-item--ar {
+  direction: rtl;
+  text-align: right;
+  unicode-bidi: isolate;
+}
+
+/* hover effects */
+.scroll-item:hover {
+  transform: translateY(-6px) scale(1.03);
+  filter: brightness(1.18);
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 0 12px 48px rgba(0, 0, 0, 0.18);
+}
+
+/* pause on hover (desktop) */
+.scroll-track:hover {
+  animation-play-state: paused !important;
+}
+
+/* keyframes move half the track width (works because we duplicate the blocks) */
+@keyframes infinite-scroll {
   0% {
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-100%);
+    transform: translateX(-50%);
   }
 }
 
-.scroll-wrapper {
-  display: flex;
-  animation: scroll 50s linear infinite;
-  width: fit-content;
-}
-
-.scroll-content {
-  display: flex;
-  align-items: center;
-  // gap: 1rem;
-  padding: 2rem 0;
-  white-space: nowrap;
-  margin-right: 0.5rem;
-}
-
-.scroll-item {
-  font-size: 16px;
-  font-weight: 400;
-  color: #e2e8f0;
-  margin-right: 1rem;
-  // text-transform: uppercase;
-  letter-spacing: 0.1em;
-  //   background: linear-gradient(135deg, #60a5fa 0%, #a855f7 50%, #ec4899 100%);
-  //   background-clip: text;
-  //   -webkit-background-clip: text;
-  //   -webkit-text-fill-color: transparent;
-  //   background-size: 200% 200%;
-  //   animation: gradient-shift 3s ease-in-out infinite;
-  //   transition: all 0.3s ease;
-  user-select: none;
-  background-color: #171717;
-  border-radius: 50px;
-  border: 1px solid #333;
-  padding: 5px 20px;
-  &:hover {
-    // transform: scale(1.1);
-    filter: brightness(1.2);
-    cursor: pointer;
-  }
-}
-
-@keyframes gradient-shift {
-  0%,
-  100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-}
-
-// Responsive breakpoints
-@media (max-width: 1200px) {
-  .scroll-container {
-    width: 40vw;
-    max-width: 40vw;
-  }
+/* Arabic page adjustments: reverse direction naturally, but we set animation-direction in-line too */
+.infinite-scroll-page--ar {
   .scroll-item {
-    font-size: 1rem;
-  }
-  .scroll-content {
-    gap: 1rem;
+    /* optional adjustment for RTL spacing */
   }
 }
 
+/* responsiveness */
 @media (max-width: 900px) {
-  .scroll-container {
-    width: 50vw;
-    max-width: 50vw;
-  }
   .scroll-item {
-    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    font-size: clamp(0.9rem, 2.8vw, 1.05rem);
   }
-  .scroll-content {
-    gap: 1.5rem;
-    padding: 1.2rem 0;
+  .core-competencies__title {
+    font-size: clamp(1.6rem, 6vw, 2.4rem);
+    margin-bottom: 1.6rem;
   }
 }
 
 @media (max-width: 600px) {
-  .infinite-scroll-page {
-    .core-competencies__title {
-      font-size: 2.1rem;
-    }
-    gap: 1rem;
-  }
-  .scroll-container {
-    width: 70vw;
-    min-width: 0;
-    max-width: 70vw;
-  }
-
   .scroll-item {
-    font-size: 14px;
-    letter-spacing: 0.05em;
-  }
-  .scroll-content {
-    gap: 0rem;
-    padding: 0.7rem 0;
+    padding: 0.45rem 0.9rem;
+    font-size: 0.95rem;
   }
 }

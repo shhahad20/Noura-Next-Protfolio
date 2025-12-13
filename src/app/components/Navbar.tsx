@@ -12,7 +12,9 @@ const Navbar: React.FC = () => {
   const { i18n, t } = useTranslation();
 
   useEffect(() => {
-    document.body.dir = i18n.language === "ar" ? "rtl" : "ltr";
+    const lang = i18n.language === "ar" ? "ar" : "en";
+    document.body.dir = lang === "ar" ? "rtl" : "ltr";
+    document.documentElement.lang = lang;
   }, [i18n.language]);
 
   const toggleLang = () => {
