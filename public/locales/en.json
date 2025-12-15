@@ -79,15 +79,16 @@
     "subtitle": "Crafting digital experiences that make a difference",
     "viewProject": "View Project"
   },
-  "core":{
+
+  "competencies": {
     "title": "Core Competencies",
-    "core1": "Business Development",
-    "core2": "Team Leadership",
-    "core3": "Mobile Application Development",
-    "core4": "Translation Services",
-    "core5": "Educator",
-    "core6": "Artist"
-  },
+    "item1": "Business Development",
+    "item2": "Team Leadership",
+    "item3": "Mobile App Development",
+    "item4": "Translation Services",
+    "item5": "Educator",
+    "item6": "Artist"
+},
   "contact":{
     "title": "Want to make a difference? So do I",
     "subtitle": "Let’s connect to share ideas, discuss partnerships, or collaborate on future projects in tech, education, or business development.",

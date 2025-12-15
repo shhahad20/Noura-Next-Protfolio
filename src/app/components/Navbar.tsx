@@ -12,17 +12,18 @@ const Navbar: React.FC = () => {
   const { i18n, t } = useTranslation();
 
   useEffect(() => {
-    const lang = i18n.language === "ar" ? "ar" : "en";
-    document.body.dir = lang === "ar" ? "rtl" : "ltr";
-    document.documentElement.lang = lang;
+    document.body.dir = i18n.language === "ar" ? "rtl" : "ltr";
   }, [i18n.language]);
 
   const toggleLang = () => {
     const newLang = i18n.language === "en" ? "ar" : "en";
     i18n.changeLanguage(newLang);
+
+    // 🔑 GLOBAL SYNC SIGNAL
+    document.documentElement.lang = newLang;
   };
 
-    const handleLinkClick = () => {
+  const handleLinkClick = () => {
     setOpen(false);
   };
 
@@ -45,23 +46,34 @@ const Navbar: React.FC = () => {
         </button>
         <ul className={`navbar__links${open ? " navbar__links--open" : ""}`}>
           <li>
-            <a href="#" onClick={handleLinkClick}>{t("navbar.home")}</a>
+            <a href="#" onClick={handleLinkClick}>
+              {t("navbar.home")}
+            </a>
           </li>
           <li>
-            <a href="#about" onClick={handleLinkClick}>{t("navbar.about")}</a>
+            <a href="#about" onClick={handleLinkClick}>
+              {t("navbar.about")}
+            </a>
           </li>
           <li>
-            <a href="#projects" onClick={handleLinkClick}>{t("navbar.projects")}</a>
+            <a href="#projects" onClick={handleLinkClick}>
+              {t("navbar.projects")}
+            </a>
           </li>
           <li>
-            <a href="#contact" onClick={handleLinkClick}>{t("navbar.contact")}</a>
+            <a href="#contact" onClick={handleLinkClick}>
+              {t("navbar.contact")}
+            </a>
           </li>
 
           <li>
-            <button className="lang-btn" onClick={() => {
+            <button
+              className="lang-btn"
+              onClick={() => {
                 toggleLang();
                 handleLinkClick();
-              }}>
+              }}
+            >
               <Languages size={18} />
               <span>{i18n.language === "en" ? "العربية" : "English"}</span>
             </button>
