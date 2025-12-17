@@ -1,3 +1,4 @@
+"use client";
 import  { useState } from "react";
 // import axios from "axios";
 import "../styles/ChatWidget.scss"; // Make sure you have a matching SCSS/CSS file

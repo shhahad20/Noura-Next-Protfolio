@@ -1,7 +1,10 @@
+"use client";
 import { useEffect, useRef, useState } from "react";
 import "../styles/ChatModal.scss";
 import { Bot, Forward } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import ReactMarkdown, { Components } from "react-markdown";
+import remarkGfm from "remark-gfm";
 
 interface ChatModalProps {
   closeModal: () => void;
@@ -15,6 +18,8 @@ const ChatModal: React.FC<ChatModalProps> = ({
   const { t, i18n } = useTranslation();
   const hasProcessedInitialMessage = useRef(false);
 
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
   const [messages, setMessages] = useState([
     {
       role: "assistant",
@@ -24,8 +29,28 @@ const ChatModal: React.FC<ChatModalProps> = ({
 
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
+  const lastCallRef = useRef(0);
+
+  // Auto-scroll to bottom when new messages arrive
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   const sendToAI = async (text: string) => {
+    const now = Date.now();
+    const timeSinceLastCall = now - lastCallRef.current;
+
+    // Increase minimum time between calls
+    if (timeSinceLastCall < 3000) {
+      const waitTime = 3000 - timeSinceLastCall;
+      await new Promise((resolve) => setTimeout(resolve, waitTime));
+    }
+
+    lastCallRef.current = Date.now();
     setLoading(true);
 
     try {
@@ -42,6 +67,7 @@ const ChatModal: React.FC<ChatModalProps> = ({
         { role: "assistant", content: data.reply ?? t("ai.error") },
       ]);
     } catch (error) {
+      console.error("Error communicating with AI:", error);
       setMessages((prev) => [
         ...prev,
         { role: "assistant", content: t("ai.error") },
@@ -52,21 +78,19 @@ const ChatModal: React.FC<ChatModalProps> = ({
   };
 
   useEffect(() => {
-    // Only process if we have a message and haven't processed it yet
     if (initialMessage && !hasProcessedInitialMessage.current) {
-      hasProcessedInitialMessage.current = true; // Mark as processed
-
-      // Add the user message
+      hasProcessedInitialMessage.current = true;
       const userMessage = { role: "user", content: initialMessage };
       setMessages((prev) => [...prev, userMessage]);
 
-      // Auto-send it to the AI
-      sendToAI(initialMessage);
+      setTimeout(() => {
+        sendToAI(initialMessage);
+      }, 500);
     }
   }, [initialMessage]);
 
   const handleSend = () => {
-    if (!input.trim()) return;
+    if (!input.trim() || loading) return;
 
     const userMessage = { role: "user", content: input };
     setMessages((prev) => [...prev, userMessage]);
@@ -74,12 +98,53 @@ const ChatModal: React.FC<ChatModalProps> = ({
     sendToAI(input);
     setInput("");
   };
+  const [retryAfter, setRetryAfter] = useState(0);
+
+  // Countdown for rate limit
+  useEffect(() => {
+    if (retryAfter > 0) {
+      const timer = setInterval(() => {
+        setRetryAfter((prev) => Math.max(0, prev - 1));
+      }, 1000);
+      return () => clearInterval(timer);
+    }
+  }, [retryAfter]);
+
+  // Custom markdown components with proper typing
+  const markdownComponents: Components = {
+    p: ({ children }) => <p className="message-paragraph">{children}</p>,
+    strong: ({ children }) => (
+      <strong className="message-bold">{children}</strong>
+    ),
+    ul: ({ children }) => <ul className="message-list">{children}</ul>,
+    ol: ({ children }) => <ol className="message-list-ordered">{children}</ol>,
+    li: ({ children }) => <li className="message-list-item">{children}</li>,
+    a: ({ children, href }) => (
+      <a
+        className="message-link"
+        href={href}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {children}
+      </a>
+    ),
+    code: ({ children, className }) => {
+      const isInline = !className;
+      return isInline ? (
+        <code className="message-code-inline">{children}</code>
+      ) : (
+        <code className="message-code-block">{children}</code>
+      );
+    },
+  };
 
   return (
     <div
       className={`chat-modal-overlay ${
         i18n.language === "ar" ? "chat-modal-overlay--ar" : ""
       }`}
+      onClick={closeModal}
     >
       <div className="chat-modal">
         {/* Header */}
@@ -100,26 +165,43 @@ const ChatModal: React.FC<ChatModalProps> = ({
         <div className="chat-messages">
           {messages.map((msg, i) => (
             <div key={i} className={`message ${msg.role}`}>
-              {msg.content}
+              <ReactMarkdown
+                remarkPlugins={[remarkGfm]}
+                components={markdownComponents}
+              >
+                {msg.content}
+              </ReactMarkdown>
             </div>
           ))}
           {loading && (
-            <div className="message assistant">{t("ai.writting")}</div>
+            <div className="message assistant">
+              <div className="message-content typing-indicator">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+            </div>
           )}
+          <div ref={messagesEndRef} />
         </div>
 
         {/* Input */}
         <div className="chat-input">
           <input
             type="text"
-            placeholder={t("ai.placeholder")}
+            placeholder={
+              retryAfter > 0 ? `Wait ${retryAfter}s...` : t("ai.placeholder")
+            }
             value={input}
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => {
               if (e.key === "Enter") handleSend();
             }}
+            disabled={retryAfter > 0}
           />
-          <button onClick={handleSend}>
+          <button  onClick={handleSend}
+            disabled={loading || retryAfter > 0 || !input.trim()}
+            className={loading || retryAfter > 0 ? "disabled" : ""}>
             <Forward size={24} />
           </button>
         </div>
