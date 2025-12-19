@@ -187,7 +187,7 @@ const RecentProjects = () => {
                     }
                   : { opacity: 0, y: 50, scale: 0.9 }
               }
-              onMouseEnter={() => setHoveredProject(project.id)}
+              // onMouseEnter={() => setHoveredProject(project.id)} //🚧🚧🚧 important for project details
               onMouseLeave={() => setHoveredProject(null)}
               // Removed whileHover to prevent card from moving up on hover
             >
