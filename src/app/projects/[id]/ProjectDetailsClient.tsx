@@ -5,7 +5,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { useTranslation } from "react-i18next";
 import { Bookmark, Calendar, Loader } from "lucide-react";
-
 import "../../styles/projectDetails.scss";
 import Navbar from "@/app/components/Navbar";
 import Footer from "@/app/components/Footer";
