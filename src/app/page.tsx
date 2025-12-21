@@ -20,7 +20,6 @@ export default function Home() {
       <About2 />
       <RecentProjects />
       <InfiniteScrollText />
-      {/* <InfiniteScrollText /> */}
       <Contact />
     </>
   );
