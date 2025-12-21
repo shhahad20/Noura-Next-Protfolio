@@ -103,11 +103,15 @@
     align-items: flex-start;
     gap: 0.5rem;
     margin-bottom: 1rem;
+    flex-wrap: wrap;
+
     h3 {
       font-size: 1.2rem;
       margin: 0;
       font-weight: 500;
       color: #f2f2f2;
+            flex: 1;
+      min-width: 0;
     }
 
     .period {
@@ -116,6 +120,8 @@
       padding: 0.3rem 0.8rem;
       background: rgba(33, 150, 243, 0.1);
       border-radius: 20px;
+      // white-space: nowrap;
+      // flex-shrink: 0;
     }
   }
 

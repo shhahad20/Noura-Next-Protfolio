@@ -10,7 +10,7 @@ const ScrollPetal: React.FC = () => {
   const textRefs = useRef<Array<HTMLDivElement | null>>([]);
   // const h2Ref = useRef(null);
   //   const pRef = useRef(null);
-  
+
   // const h2InView = useInView(h2Ref, { once: true, margin: "-100px" });
   // const pInView = useInView(pRef, { once: true, margin: "-50px" });
 
@@ -117,20 +117,98 @@ const ScrollPetal: React.FC = () => {
     <div>
       {/* keep your inline CSS as before or move to SCSS file — unchanged */}
       <style>{`
-        * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { background: #0a0a0a; color: #fff; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; }
+        * { 
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0; 
+        }
+        body { 
+        background: #0a0a0a;
+        color: #fff;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+
         // .spacer { height: 50vh; }
         // .content-section { padding: 100px 5%; max-width: 1400px; margin: 0 auto; }
         // .content-section h2 { font-size: 48px; font-weight: 300; margin-bottom: 20px; letter-spacing: -0.02em; }
-        .content-section p { font-size: 18px; line-height: 1.6;  max-width: 600px; }
-        .svg-container { position: relative; width: 100%; height: 400vh; margin: 0px 0; }
-        .svg-wrapper { position: sticky; top: 50%; transform: translateY(-50%); width: 100%; height: 100vh; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 60px; }
-        svg { width: 40%; max-width: 400px; height: auto; display: block; }
-        .draw-line { stroke: #fff; stroke-width: 3; fill: none; stroke-linejoin: round; stroke-linecap: round; }
-        .text-container { position: relative; height: 120px; display: flex; align-items: center; justify-content: center; }
-        .petal-text { position: absolute; font-size: 20px; font-weight: 300; letter-spacing: -0.02em; text-align: center; opacity: 0; transition: opacity 260ms linear, transform 260ms linear; will-change: opacity, transform; pointer-events: none; color: #fff; }
-        .petal-text .prof-name { margin: 6px 0 0; font-size: 14px; color: #cfcfcf; }
-        .petal-text .prod-date { margin: 2px 0 0; font-size: 13px; color: #a9a9a9; }
+        .content-section p {
+        font-size: 18px;
+        line-height: 1.6; 
+        max-width: 600px;
+        }
+        .svg-container {
+        position: relative;
+        width: 100%;
+        max-width: 100vw;
+        height: 400vh;
+        margin: 0px 0;
+        }
+        .svg-wrapper {
+        position: sticky;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 100%;
+        height: 100vh;
+        display: flex; 
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 60px;
+        padding: 0 1rem;
+        }
+        svg {
+        width: 40%;
+        max-width: 400px;
+        height: auto;
+        display: block;
+        }
+        .draw-line {
+        stroke: #fff;
+        stroke-width: 3;
+        fill: none;
+        stroke-linejoin: round;
+        stroke-linecap: round;
+        }
+        .text-container {
+        position: relative;
+        height: 120px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 1rem;
+        width: 100%;
+        max-width: 90vw;
+        box-sizing: border-box;
+        }
+        .petal-text {
+        position: absolute;
+        font-size: 20px;
+        font-weight: 300;
+        letter-spacing: -0.02em;
+        text-align: center;
+        opacity: 0;
+        transition: opacity 260ms linear, transform 260ms linear;
+        will-change: opacity, transform;
+        pointer-events: none;
+        color: #fff;
+        padding: 0 1rem;
+
+          padding: 0 0.5rem;
+          word-wrap: break-word;
+          overflow-wrap: break-word;
+          box-sizing: border-box;
+
+        }
+        .petal-text .prof-name {
+        margin: 6px 0 0;
+        font-size: 14px;
+        color: #cfcfcf;
+        }
+        .petal-text .prod-date {
+        margin: 2px 0 0;
+        font-size: 13px;
+        color: #a9a9a9;
+        }
         // @media (max-width: 768px) {
         //   .content-section h2 { font-size: 32px; }
         //   .content-section p { font-size: 16px; }
