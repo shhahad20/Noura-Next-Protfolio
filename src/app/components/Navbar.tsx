@@ -6,10 +6,12 @@ import { Languages } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 import "../styles/Navbar.scss";
+import { useRouter } from "next/navigation";
 
 const Navbar: React.FC = () => {
   const [open, setOpen] = useState(false);
   const { i18n, t } = useTranslation();
+  const router = useRouter(); // Add this hook
 
   useEffect(() => {
     document.body.dir = i18n.language === "ar" ? "rtl" : "ltr";
@@ -27,6 +29,9 @@ const Navbar: React.FC = () => {
     setOpen(false);
   };
 
+    const handleHomeClick = () => {
+    router.push("/home");
+  };
   return (
     <motion.nav
       className="navbar"
@@ -46,7 +51,7 @@ const Navbar: React.FC = () => {
         </button>
         <ul className={`navbar__links${open ? " navbar__links--open" : ""}`}>
           <li>
-            <a href="#" onClick={handleLinkClick}>
+            <a href="/home" onClick={handleLinkClick}>
               {t("navbar.home")}
             </a>
           </li>
@@ -61,7 +66,7 @@ const Navbar: React.FC = () => {
             </a>
           </li>
           <li>
-            <a href="#contact" onClick={handleLinkClick}>
+            <a href="/contact" onClick={handleLinkClick}>
               {t("navbar.contact")}
             </a>
           </li>
