@@ -6,12 +6,13 @@ import { Languages } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 import "../styles/Navbar.scss";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 
 const Navbar: React.FC = () => {
   const [open, setOpen] = useState(false);
   const { i18n, t } = useTranslation();
-  const router = useRouter(); // Add this hook
+  const router = useRouter();
+  const pathname = usePathname(); // Add this hook to get current path
 
   useEffect(() => {
     document.body.dir = i18n.language === "ar" ? "rtl" : "ltr";
@@ -29,9 +30,22 @@ const Navbar: React.FC = () => {
     setOpen(false);
   };
 
-    const handleHomeClick = () => {
-    router.push("/home");
+   const handleSectionClick = (e: React.MouseEvent<HTMLAnchorElement>, section: string) => {
+    e.preventDefault();
+    handleLinkClick();
+    
+    // If not on home page, navigate to home with hash
+    if (pathname !== "/home") {
+      router.push(`/home#${section}`);
+    } else {
+      // If already on home page, just scroll to section
+      const element = document.getElementById(section);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
   };
+
   return (
     <motion.nav
       className="navbar"
@@ -56,12 +70,12 @@ const Navbar: React.FC = () => {
             </a>
           </li>
           <li>
-            <a href="#about" onClick={handleLinkClick}>
+            <a href="#about" onClick={(e) => handleSectionClick(e, "about")}>
               {t("navbar.about")}
             </a>
           </li>
           <li>
-            <a href="#projects" onClick={handleLinkClick}>
+            <a href="#projects" onClick={(e) => handleSectionClick(e, "projects")}>
               {t("navbar.projects")}
             </a>
           </li>
