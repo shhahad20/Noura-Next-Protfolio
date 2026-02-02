@@ -146,7 +146,7 @@ const ChatModal: React.FC<ChatModalProps> = ({
       }`}
       onClick={closeModal}
     >
-      <div className="chat-modal">
+      <div className="chat-modal" onClick={(e) => e.stopPropagation()}>
         {/* Header */}
         <div className="chat-header">
           <div className="chat-title">
